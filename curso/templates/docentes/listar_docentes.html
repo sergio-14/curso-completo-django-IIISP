@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<br><br>
+<section class=" contenido  p-5">
+    <h1 class="pb-5">Lista de Docentes</h1>
+    <a href="{% url 'crear_docente' %}" class="btn btn-dark mb-2">Agregar Docente</a>
+    <table class="table table-striped text-center">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Foto</th>
+            <th scope="col">Nombre Completo</th>
+            <th scope="col">Especialidad</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for docente in docente %}
+          <tr>
+            
+            <th>
+                {% if docente.imagen_d %}
+                <img src="{{ docente.imagen_d.url }}" alt="Foto de {{ docente.usuario_d.first_name }}" class="img-thumbnail" width="50" height="50">
+                {% else %}
+                <img src="{% static 'img/SINFOTO.webp' %}" alt="Foto de {{ docente.usuario_d.first_name }}" class="img-thumbnail" width="50" height="50">
+                {% endif %}
+            </th>
+            <td> {{ docente.titulo }} {{ docente.usuario_d.first_name }} {{ docente.usuario_d.last_name }} </td>
+            <td> {{ docente.especialidad }} </td>
+            <td>
+                <a href="{% url 'editar_docente' docente.id %}" class="btn btn-warning btn-sm">Editar</a>
+                <a href="{% url 'eliminar_docente' docente.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+            
+          </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

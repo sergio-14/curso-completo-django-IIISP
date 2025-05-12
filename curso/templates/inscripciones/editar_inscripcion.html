@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<br><br>
+<section class=" pt-5 container contenido p-5">
+    <h1>Crear Nuevo Docente</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-4" >{{ form.estudiante|as_crispy_field }}</div>
+            <div class="col-8" >{{ form.curso|as_crispy_field }}</div>
+            <div class="col-5" >{{ form.estado|as_crispy_field }}</div>
+            <div class="col-3" >{{ form.precio_total|as_crispy_field }}</div>
+           
+        </div>
+        <button type="submit" class="btn btn-dark ">guardar datos </button>
+        <a class="btn  btn-secondary" href="{% url 'listar_inscripciones'  %}"> Cancelar registro</a>
+    </form>
+
+</section>
+{% endblock %}

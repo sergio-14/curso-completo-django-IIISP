@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<br><br>
+<section class=" contenido  p-5">
+    <h1 class="pb-5">Lista de Estudiantes</h1>
+    <a href="{% url 'crear_estudiante' %}" class="btn btn-dark mb-2">Agregar Estudiantes</a>
+    <table class="table table-striped text-center">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Foto</th>
+            <th scope="col">Nombre Completo</th>
+            <th scope="col">Matricula</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for estudiante in estudiante %}
+          <tr>
+            
+            <th>
+                {% if estudiante.imagen_e %}
+                <img src="{{ estudiante.imagen_e.url }}" alt="Foto de {{ estudiante.usuario_d.first_name }}" class="img-thumbnail" width="50" height="50">
+                {% else %}
+                <img src="{% static 'img/SINFOTO.webp' %}" alt="Foto de {{ estudiante.usuario_d.first_name }}" class="img-thumbnail" width="50" height="50">
+                {% endif %}
+            </th>
+            <td> {{ estudiante.usiuario_e.first_name }} {{ estudiante.usiuario_e.last_name }} </td>
+            <td> {{ estudiante.matricula }} </td>
+            <td>
+                <a href="{% url 'editar_estudiante' estudiante.id %}" class="btn btn-warning btn-sm">Editar</a>
+                <a href="{% url 'eliminar_estudiante' estudiante.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+            
+          </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

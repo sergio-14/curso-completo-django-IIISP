@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<br><br>
+<section class="pt-5 container contenido p-5"> 
+    <div class="d-flex justify-content-between pt-4 pb-2">
+        <h1 class="text-start ">Listar Cursos </h1>
+        <div class="pb-0 pt-5">
+            <a class="btn btn-sm btn-dark" href="{% url 'crear_curso' %}"> Crear Nuevo Curso  </a>
+        </div>
+    </div>
+    {% for curso in curso %}
+    <div class="row contenido p-3 my-2 d-flex justify-content-center align-items-center ">
+        <div class="col-3 text-center ">
+            <div>
+                {% if curso.docente.imagen_d %}
+                <img src="{{ curso.docente.imagen_d.url }}" alt="Imagen del docente" class="img-fluid rounded-circle bg-nav" style="width: 160px; height: 160px;">
+                {% else %}
+                sin foto
+                {% endif %}
+            </div>
+            <p >Nombre Docente<br> {{ curso.docente}} </p>
+        </div> 
+        <div class="col-9">
+            
+            <img src="{{ curso.imagen_portada.url }}" alt="Imagen del curso" class="img-fluid rounded-3" style="width: 100%; height: 150px;">
+            <p class="text-end pt-3 ">Inicia el: {{ curso.fecha_inicio }} hasta {{ curso.fecha_fin }} </p>
+            <h6>
+                Titulo del Curso o Taller: {{ curso.titulo }}
+            </h6>
+            <p>descripción del Curso: {{ curso.descripcion }} </p>           
+            <div class="d-flex justify-content-between">
+                <p>Nivel: {{ curso.nivel }}  Duracion: {{ curso.duracion }} </p>
+                <div class="">
+                  
+                    <a class="btn btn-sm btn-dark " href="{% url 'editar_curso' id=curso.id %}"> editar </a>
+                    <a class="btn btn-sm btn-secondary" href="{% url 'eliminar_curso' id=curso.id %}"> eliminar </a>
+                </div> 
+            </div>  
+        </div>  
+         
+    </div> 
+    {% endfor %} 
+</section>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<section class="pt-5 pb-5 container"> 
+    <br>
+    <div class="contenido p-5">  
+        <h1 class="text-start pb-3">Eliminar Inscripción</h1> 
+        <p>¿Estás seguro de que deseas eliminar el curso "{{ inscripcion.curso }}"?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button class="btn btn-danger" type="submit">Eliminar</button>
+            <a class="btn btn-secondary" href="{% url 'listar_inscripciones' %}">Cancelar</a>
+        </form>
+    </div> 
+</section>
+{% endblock %}
